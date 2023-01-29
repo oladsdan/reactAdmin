@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import './sidebar.scss'; 
 import { DashboardIcon,
     PersonOutlinedIcon,
@@ -12,12 +12,18 @@ import { DashboardIcon,
     AccountCircleOutlinedIcon,
     ExitToAppOutlinedIcon,
     SettingsSystemDaydreamOutlinedIcon } from "./icons";
+    import { Link } from "react-router-dom";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 function Sidebar () {
+    const {dispatch} = useContext(DarkModeContext);// then we use dispatch to pass the functions to toggle
+
     return (
         <div className="sidebar">
             <div className="top">
-                <span className="logo">OladsAdmin</span>
+                <Link to="/" style={{textDecoration : "none"}}>
+                    <span className="logo">OladsAdmin</span>
+                </Link>
             </div>
             <hr />
             <div className="center">
@@ -28,14 +34,21 @@ function Sidebar () {
                         <span>Dashboard</span>
                     </li>
                     <p className="title">Lists</p>
-                    <li>
-                        <PersonOutlinedIcon className="icon" />
-                        <span>Users</span>
-                    </li>
-                    <li>
-                        <StoreOutlinedIcon className="icon" />
-                        <span>Products</span>
-                    </li>
+                    <Link to="/users" style={{textDecoration : "none"}}>
+                        
+                        <li>
+                            <PersonOutlinedIcon className="icon" />
+                            <span>Users</span>
+                        </li>
+                    </Link>
+                    <Link to="/products" style={{textDecoration : "none"}}>
+                        <li>
+                            <StoreOutlinedIcon className="icon" />
+                            <span>Products</span>
+                        </li>
+
+                    </Link>
+                    
                     <li>
                         <CreditCardOutlinedIcon className="icon" />
                         <span>Orders</span>
@@ -78,8 +91,11 @@ function Sidebar () {
                 </ul>
             </div>
             <div className="bottom">
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
+                <div className="colorOption"
+                 onClick={() => dispatch({ type: "Light" })}
+                 ></div>
+                <div className="colorOption"
+                onClick={() => dispatch({ type: "Dark" })}></div>
             </div>
         </div>
     )

@@ -14,4 +14,13 @@
     we use the material ui library for the tables as well
     npm install @mui/x-data-grid
     this is used for the datatable components
+
+### Applying dark mode
+    create a folder called style and a file called dark.scss
+    import to the app.js
     
+### CONTEXT
+    we create a context Api to be able to pass properties of the darkmode to enable toggle function,
+    since using state seems inefficient
+
+    we also use the USEREducer hook for the functions to use
